@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MTD Readiness Checker (UK)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>MTD Readiness Checker</h1>
+    <p class="subtitle">A simple UK-focused check for Making Tax Digital readiness.</p>
+  </header>
+
+  <main class="container card" id="app">
+    <div id="progress" aria-live="polite">Step 1 of 5</div>
+    <div class="progress-track" aria-hidden="true"><div id="progressFill"></div></div>
+
+    <form id="checkerForm" novalidate>
+      <section class="step active" data-step="1">
+        <h2>1) Are you VAT registered?</h2>
+        <label class="choice"><input type="radio" name="vatStatus" value="yes" required /> Yes</label>
+        <label class="choice"><input type="radio" name="vatStatus" value="no" /> No</label>
+      </section>
+
+      <section class="step" data-step="2">
+        <h2>2) What is your annual business/property income?</h2>
+        <label for="income">Estimated gross annual income (£)</label>
+        <input id="income" name="income" type="number" min="0" step="100" placeholder="e.g. 42000" required />
+        <small>Thresholds used: £50,000 (2026), £30,000 (2027)</small>
+      </section>
+
+      <section class="step" data-step="3">
+        <h2>3) How do you keep records today?</h2>
+        <label class="choice"><input type="radio" name="recordKeeping" value="paper" required /> Mostly paper/manual</label>
+        <label class="choice"><input type="radio" name="recordKeeping" value="spreadsheet" /> Spreadsheet</label>
+        <label class="choice"><input type="radio" name="recordKeeping" value="software" /> Accounting software</label>
+      </section>
+
+      <section class="step" data-step="4">
+        <h2>4) Do you already file digitally?</h2>
+        <label class="choice"><input type="radio" name="digitalFiling" value="yes" required /> Yes, regularly</label>
+        <label class="choice"><input type="radio" name="digitalFiling" value="sometimes" /> Sometimes</label>
+        <label class="choice"><input type="radio" name="digitalFiling" value="no" /> No</label>
+      </section>
+
+      <section class="step" data-step="5">
+        <h2>5) How confident are you about MTD compliance?</h2>
+        <label class="choice"><input type="radio" name="confidence" value="high" required /> Confident</label>
+        <label class="choice"><input type="radio" name="confidence" value="medium" /> Somewhat confident</label>
+        <label class="choice"><input type="radio" name="confidence" value="low" /> Not confident</label>
+      </section>
+
+      <p id="stepError" class="error hidden" role="alert">Please complete this step before continuing.</p>
+
+      <div class="buttons">
+        <button type="button" id="backBtn" class="secondary">Back</button>
+        <button type="button" id="nextBtn">Next</button>
+      </div>
+    </form>
+
+    <section id="emailGate" class="hidden">
+      <h2>Get your full readiness report</h2>
+      <p>Enter your email to unlock the complete report and recommendations.</p>
+      <form id="emailForm">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" required placeholder="you@example.co.uk" />
+        <label class="consent"><input id="consent" name="consent" type="checkbox" required /> I agree to receive the report and MTD follow-up emails.</label>
+        <button type="submit">Show full report</button>
+      </form>
+      <p class="microcopy">We only use this for report delivery and occasional MTD updates.</p>
+    </section>
+
+    <section id="result" class="hidden" aria-live="polite">
+      <h2>Your MTD Readiness Result</h2>
+      <div class="result-grid">
+        <article>
+          <h3>MTD applicability</h3>
+          <p id="applicability"></p>
+        </article>
+        <article>
+          <h3>Deadline year</h3>
+          <p id="deadline"></p>
+        </article>
+        <article>
+          <h3>Risk level</h3>
+          <p id="risk"></p>
+        </article>
+        <article>
+          <h3>Digital Gap summary</h3>
+          <p id="gap"></p>
+        </article>
+      </div>
+
+      <aside class="affiliate">
+        <h3>Recommended tools (affiliate placeholders)</h3>
+        <ul>
+          <li><a href="javascript:void(0)" rel="nofollow">Affiliate Link Placeholder: MTD-ready bookkeeping software</a></li>
+          <li><a href="javascript:void(0)" rel="nofollow">Affiliate Link Placeholder: Bridging software</a></li>
+          <li><a href="javascript:void(0)" rel="nofollow">Affiliate Link Placeholder: Accountant referral service</a></li>
+        </ul>
+      </aside>
+
+      <button id="restartBtn" class="secondary" type="button">Start again</button>
+
+      <p class="disclaimer">
+        Legal disclaimer: This checker is for general information only and does not constitute tax or legal advice.
+        Always confirm your obligations with HMRC guidance or a qualified tax adviser.
+      </p>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>Built for UK sole traders and landlords preparing for Making Tax Digital.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
